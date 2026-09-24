@@ -39,5 +39,61 @@ public class Traversals {
     child3_1.children = new ArrayList<>();
     child3_1.children.add(child3_1_1);
     child3_1.children.add(child3_1_2);
+
+
+    Map<Integer, List<Integer>> tree = new HashMap<>();
+    
+    tree.put(88, List.of(17, 58, 33));
+    tree.put(17, List.of(5, 99));
+    tree.put(58, List.of(73));
+    tree.put(33, List.of(24, 61, 12));
+    tree.put(24, List.of(83, 6));
+
+
+    //preorder(root);
+
+    //preorderMap(tree, 88);
+
+    System.out.println(sum(root));
+
+  }
+
+  public static <T> void preorderMap(Map<T, List<T>> tree, T node) {
+    if(tree == null || node == null) return;
+
+    System.out.println(node);
+
+    //if(tree.get(node) == null) return;
+
+    for(T child : tree.getOrDefault(node, new ArrayList<>())) {
+      preorderMap(tree, child);
+
+    }
+  }
+
+  // public static <T> void preorder(Node<T> node) {
+  public static void preorder(Node<?> node) {
+    if(node == null) return;
+
+    System.out.println(node.value);
+
+    //if (node.children == null) return;
+
+    // recurse through ALL my children
+    for(Node<?> child : node.children) {
+      preorder(child);
+    }
+  }
+
+  public static int sum (Node<Integer> node) {
+    if(node == null) return 0;
+
+    int total = node.value;
+
+    for(Node<Integer> child : node.children) {
+      total += sum(child);
+    }
+
+    return total;
   }
 }
